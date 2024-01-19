@@ -1,0 +1,8 @@
+bootstrap.servers=pkc-4nxnd.asia-east2.gcp.confluent.cloud:9092
+security.protocol=SASL_SSL
+sasl.mechanisms=PLAIN
+sasl.username= EG53ND5XQWLVNDMU 
+sasl.password= VahdBsIPwTyi9pFlfv0V9mUQq2eNVOZjFVUapbOJgom0PRPG1/m1UDnH5vyBufqx 
+
+# Best practice for Kafka producer to prevent data loss
+acks=all
