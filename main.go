@@ -9,34 +9,22 @@ import (
 	"os/signal"
 	"syscall"
 
+	model "confluent/model"
+
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/gofiber/fiber/v2"
 )
-
-type Bus struct {
-	ID         int      `json:"id"`
-	Route      string   `json:"routeid"`
-	Driver     string   `json:"driver"`
-	BusId      int      `json:"busId"`
-	Location   Location `json:"location"`
-	SequenceId int      `json:"sequenceId"`
-}
-type Location struct {
-	Lat float32 `json:"lat"`
-	Lon float32 `json:"lon"`
-}
 
 var producer *kafka.Producer
 var consumer *kafka.Consumer
 var socket net.Conn
 
-var localBus = new(Bus)
+var localBus = new(model.Bus)
 
 func main() {
 	app := fiber.New()
 
 	producerCon()
-	//go consumerCon()
 
 	app.Post("/send", CreateTest)
 	app.Get("/get", GetBus)
@@ -75,7 +63,7 @@ func producerCon() {
 }
 
 func CreateTest(c *fiber.Ctx) error {
-	bus := new(Bus)
+	bus := new(model.Bus)
 	if err := c.BodyParser(bus); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"message": err.Error()})
 	}

@@ -24,7 +24,7 @@ func main() {
 
 		fmt.Println("Received connection")
 
-		go handleConnection(conn) // Handle the connection in a new goroutine
+		go handleConnection(conn)
 	}
 }
 
